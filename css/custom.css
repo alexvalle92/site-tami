@@ -1,0 +1,609 @@
+#header .header-nav-main.header-nav-main-mobile-dark nav > ul > li > a{
+    color: #333333;
+}
+
+#header .header-nav.header-nav-links.header-nav-light-text nav > ul > li > a, #header .header-nav.header-nav-line.header-nav-light-text nav > ul > li > a{
+    color: #333333;
+}
+
+#header .header-nav.header-nav-links.header-nav-light-text nav > ul > li > a:hover, #header .header-nav.header-nav-line.header-nav-light-text nav > ul > li > a:hover{
+    color: #25995c;
+}
+
+#header .header-nav.header-nav-links nav > ul:not(:hover) > li > a.active{
+    color: #25995c;
+}
+
+.btn-primary:hover, .btn-primary.hover{
+    background-color: #4f6e2c !important;
+    border-color: #075e54 !important;
+}
+
+.btn-primary:active:not(.bg-transparent), .btn-primary.active:not(.bg-transparent){
+    background-color: #25d366;
+    border-color: #128c7e;
+}
+
+.btn-primary:active, .btn-primary.active{
+    background-color: #25d366;
+    border-color: #128c7e;
+}
+
+.btn-primary:active:not(.bg-transparent), .btn-primary.active:not(.bg-transparent){
+    background-color: #25d366;
+    border-color: #128c7e;
+}
+
+
+.text-color-primary, .text-primary {
+    color: #bb951c !important;
+}
+
+.btn-success-whatsapp{
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #25d366;
+        --bs-btn-border-color: #25d366;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #128c7e;
+        --bs-btn-hover-border-color: #128c7e;
+        --bs-btn-focus-shadow-rgb: 60, 153, 110;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #128c7e;
+        --bs-btn-active-border-color: #128c7e;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: #25d366;
+        --bs-btn-disabled-border-color: #25d366;
+}
+
+.social-icons li:hover.social-icons-instagram a {
+    background-color: #ee2a7b !important; 
+}
+
+.social-icons li:hover.social-icons-tiktok a {
+    background-color: #000000 !important; 
+}
+
+/*.process .process-step:hover .process-step-circle{
+  background-color: #F4F4F4 !important;
+}*/
+
+.process-connecting-line .connecting-line {
+    background-color: #25995c;
+}
+
+.process .process-step-circle {
+    border-color: #25995c;
+}
+
+.svg-fill-color-primary {
+    fill: #54743c !important;
+}
+
+.toggle-primary .toggle label, .toggle-primary .toggle .toggle-title{
+    color: #222222 !important;
+    border-left-color: #bb951c !important;
+    border-right-color: #bb951c !important;
+}
+
+.toggle-primary .toggle.active > label, .toggle-primary .toggle.active > .toggle-title{
+    background-color: #EACE74;
+    border-color: #DFB42B;
+    color: #EACE74;
+}
+
+.list.list-icons li > [class*="fa-"]:first-child, .list.list-icons li > .icons:first-child, .list.list-icons li a:first-child > [class*="fa-"]:first-child, .list.list-icons li a:first-child > .icons:first-child{
+    color: #25995c;
+    border-color: #25995c;
+}
+ 
+  /*tooltip */
+  .tooltip {
+    visibility: hidden;
+    z-index: 1;
+    opacity: .40;
+    width: 170%;
+    padding: 0px;
+    background: #333;
+    color: #FFF !important;
+    position: absolute;
+    top:-140%;
+    left: -35%;
+    border-radius: 9px;
+    font: 12px;
+    transform: translateY(9px);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
+    text-align: center;
+  }
+  
+  /* tooltip  after*/
+  .tooltip::after {
+    content: " ";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12px 12.5px 0 12.5px;
+    border-color: #333 transparent transparent transparent;
+    position: absolute;
+    left: 40%;
+  }
+  
+  .con-tooltip .tooltip{
+    visibility: hidden;
+    transform: translateY(-10px);
+    opacity: 1;
+      transition: .3s linear;
+    animation: odsoky 1s ease-in-out infinite  alternate;
+  
+  }
+
+  /*.con-tooltip .show-tooltip .tooltip{
+    visibility: visible;
+  }*/
+
+ .show-tooltip{
+    visibility: visible !important;
+  }
+
+  @keyframes odsoky {
+    0%{
+      transform: translateY(6px); 
+    }
+    100%{
+      transform: translateY(1px); 
+    }
+  }
+  
+  /*hover ToolTip*/
+  .top:hover {transform: translateY(-6px);  }
+
+  .tooltip p {
+    color: #FAFAFA !important;
+    margin: 3px;
+  }
+
+.scroll-to-top :hover, .scroll-to-top :focus{
+    color: #FFF;
+}
+
+/* Theme consulting init */
+
+/* Custom Hero Row */
+.custom-hero-row {
+  min-height: calc(100vh - 100px);
+}
+
+/* Custom Elements */
+.custom-element-wrapper {
+  position: absolute;
+}
+
+.custom-element-wrapper.custom-element-1 {
+  top: 25%;
+  left: 45%;
+  width: 300px;
+  height: 300px;
+}
+
+.custom-element-wrapper.custom-element-1 .custom-element {
+  background: transparent;
+  border: 3px solid var(--primary);
+  opacity: 0.05;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+}
+
+.custom-element-wrapper.custom-element-2 {
+  top: 45%;
+  left: 62%;
+  width: 150px;
+  height: 150px;
+}
+
+.custom-element-wrapper.custom-element-2 .custom-element {
+  background: var(--primary);
+  opacity: 0.05;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+}
+
+.custom-element-wrapper.custom-element-3 {
+  top: 57%;
+  left: 70%;
+  width: 100px;
+  height: 100px;
+}
+
+.custom-element-wrapper.custom-element-3 .custom-element {
+  background: transparent;
+  border: 3px solid var(--primary);
+  opacity: 0.05;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+}
+
+.custom-element-wrapper.custom-element-4 {
+  top: 57%;
+  left: 44%;
+  width: 100px;
+  height: 100px;
+}
+
+.custom-element-wrapper.custom-element-4 .custom-element {
+  background: var(--primary);
+  opacity: 0.03;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+}
+
+.custom-element-wrapper.custom-element-5 {
+  top: 18%;
+  left: 7%;
+  width: 450px;
+  height: 450px;
+}
+
+.custom-element-wrapper.custom-element-5 .custom-element {
+  background: var(--secondary);
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+}
+
+@media (min-width: 768px) {
+  .custom-element-wrapper.custom-element-5 {
+      top: 18%;
+      left: 15%;
+  }
+}
+
+@media (min-width: 992px) {
+  .custom-element-wrapper.custom-element-5 {
+      top: 27%;
+      left: 22%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .custom-element-wrapper.custom-element-5 {
+      top: 22%;
+      left: 22%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .custom-element-wrapper.custom-element-5 {
+      top: 27%;
+      left: 78%;
+  }
+}
+
+.custom-element-wrapper.custom-element-6 {
+  width: 160px;
+  height: 160px;
+  top: 22.2%;
+  right: -8%;
+}
+
+.custom-element-wrapper.custom-element-7 {
+  width: 160px;
+  height: 160px;
+  top: 58.2%;
+  right: -38%;
+}
+
+.custom-element-wrapper.custom-element-8 {
+  top: -5%;
+  left: -6%;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 77.2% 100%, 0 54%);
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 77.2% 100%, 0 54%);
+}
+
+@media (min-width: 768px) {
+  .custom-element-wrapper.custom-element-8 {
+      top: -5%;
+      left: 5%;
+  }
+}
+
+@media (min-width: 992px) {
+  .custom-element-wrapper.custom-element-8 {
+      top: 5%;
+      left: 5%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .custom-element-wrapper.custom-element-8 {
+      top: 0%;
+      left: 10%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .custom-element-wrapper.custom-element-8 {
+      top: 5%;
+      left: 63%;
+  }
+}
+
+.custom-element-wrapper.custom-element-9 {
+  width: 160px;
+  height: 160px;
+  top: 5%;
+  left: 7%;
+}
+
+.custom-element-wrapper.custom-element-10 {
+  width: 160px;
+  height: 160px;
+  top: 65%;
+  right: 10%;
+}
+
+.custom-element-wrapper.custom-element-11 {
+  display: inline-block;
+}
+
+.custom-element-wrapper.custom-element-11 img {
+  border-radius: 25px;
+}
+
+.custom-element-wrapper.custom-element-11:before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 30px;
+  left: -30px;
+  background: var(--primary);
+  border-radius: 25px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Page Header */
+.page-header {
+  padding-top: 153px;
+  padding-bottom: 0;
+}
+
+.page-header .container:before {
+  content: "";
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06);
+  position: absolute;
+}
+
+/* Breadcrumb */
+.breadcrumb li {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.breadcrumb > li + li:before {
+  padding: 0 7px 0 7px;
+}
+
+.main > #home > .container > .row > .col > .row > .mt-5, .main > #home > .container > .row > .col > .row > .pt-5 {
+  margin-top: 0px !important;
+}
+
+#header .header-nav-main.header-nav-main-mobile-dark:before{
+  background-color: #DFDFDF;
+}
+
+@media screen and (min-width: 991px) {
+  .img-fundo{
+    background-image: url ("img/fundo-nutri-tami.png");
+  }
+
+  .fixo-rodape, .section-mobile{
+    display: none;
+  }
+
+  .section-desktop{
+    display: inline;
+  }
+  
+  .section-preco{
+    display: none;
+  }
+
+  h1{
+    font-size: 36px;
+    line-height: 46px;
+  }
+
+  .p-descricao-1{
+    margin-bottom: 0px; 
+    line-height: 38px;
+    font-size: 22px !important;
+  }
+
+  .p-descricao-2{
+    margin-bottom: 0px; 
+    color: #bb951c;
+    font-weight: bold;
+    margin-top: 22px;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .section .pt-5{
+    padding-top: 0px !important;
+    padding-bottom: 30px !important;
+  }
+
+  .img-fundo{
+    background-image: url ("img/fundo-nutri-tami-tablet.png");
+  }
+
+  .section-desktop h2{
+    font-size: 28px !important;
+  }
+  
+  .fixo-rodape, .section-mobile{
+    display: inline;
+  }
+
+  .section-desktop{
+    display: none;
+  }
+
+  .section-preco{
+    display: inline;
+  }
+
+  h1{
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .p-descricao-1{
+    margin-bottom: 0px
+  }
+
+  .p-descricao-2{
+    margin-bottom: 0px; 
+    color: #bb951c;
+  }
+
+  .process-step-content p{
+    font-size: 17px;
+  }
+
+  .process-step-content h4{
+    font-size: 25px !important;
+  }
+  .card-body blockquote p{
+    font-size: 18px !important;
+  }
+
+  #sobre p{
+    font-size: 18px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #sobre-foto{
+    display: none;
+  }
+
+  #sobre-foto-2{
+    display: block;
+  }
+  .sobre2-mobile{
+    display: block;
+  }
+  .sobre2-desktop{
+    display: none;
+  }
+
+  .img-fundo{
+    background-image: url ("img/fundo-nutri-tami-celular.png");
+  }
+}
+
+@media screen and (min-width: 481px) {
+  #sobre-foto{
+    display: block;
+  }
+
+  #sobre-foto-2{
+    display: none;
+  }
+  .sobre2-mobile{
+    display: none;
+  }
+  .sobre2-desktop{
+    display: block;
+  }
+}
+
+.font-weight-normal{
+  color: #BFBFBF !important;
+}
+
+
+.list.list-icons-preco {
+  margin-top: 90px;
+}
+
+.list.list-icons-segundo-preco {
+  margin-top: 0px;
+}
+
+.badge {
+  text-align: justify;
+}
+
+.blockquote-tertiary{
+  border-color: #7ca84c !important;
+}
+
+.blockquote-tertiary p{
+  margin: 10px 0px !important;
+}
+
+.fixo-rodape{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #283129bf;
+  color: white;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  padding: 10px 10px 20px 10px;
+  font-size: 16px;
+  z-index: 1000; /* garante que fique acima de outros elementos */
+}
+
+.img-logo{
+  margin-bottom: 10px;
+}
+
+h4 .text-color-terc{
+  color: #4f6e2c;
+}
+
+#servicos p, #quem-detalhe p{
+  line-height: 20px;
+}
+
+.bg-color-primary, .bg-primary{
+  background-color: #486429 !important;
+}
+
+.btn-primary{
+  background-color: #557432 !important;
+  border-color: #2b3b18;
+}
+
+.call-to-action.featured.featured-secondary{
+  border-color: #557432 !important;
+}
+
+.divider.divider-primary.divider-small hr{
+  background: #bb951c;
+}
+
+.card-border:after{
+  background-color: #557432;
+}
+
+section.section-dark h1{
+  color: #9c7d17;
+}
+
+section.section-dark p{
+  color: #505050;
+}

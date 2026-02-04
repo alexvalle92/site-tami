@@ -1,0 +1,11 @@
+section.section {
+    margin: 0;
+}
+
+.list.list-icons li > [class*="fa-"]:first-child, .list.list-icons li > .icons:first-child, .list.list-icons li a:first-child > [class*="fa-"]:first-child, .list.list-icons li a:first-child > .icons:first-child{
+  position: static;
+}
+
+.list li{
+  margin-bottom: 5px;
+}
