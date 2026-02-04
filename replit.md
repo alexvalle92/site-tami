@@ -1,24 +1,34 @@
 # Nutri Landing Pages
 
 ## Overview
-A collection of static HTML landing pages for a nutritionist/health professional website. The site is in Portuguese and offers online nutrition consultations.
+A collection of landing pages for a nutritionist/health professional website. The site is in Portuguese and offers online nutrition consultations.
 
 ## Project Structure
-- `/` - Root contains all HTML pages (index.html, various landing page variants)
+- `/src/` - TypeScript server code
 - `/css/` - Custom stylesheets and themes
 - `/js/` - Custom JavaScript files
 - `/img/` - Image assets
 - `/video/` - Video assets
 - `/vendor/` - Third-party libraries (Bootstrap, FontAwesome, jQuery plugins, etc.)
+- `/*.html` - HTML landing pages
 
 ## Tech Stack
-- Static HTML/CSS/JavaScript
+- TypeScript with Express.js server
 - Bootstrap framework
 - jQuery and various plugins
-- No build process required
+
+## Routes
+- `/` - Main page (nutri-online-v1.html)
+- `/consultaPremium` - Consulta Premium page
+- `/consultoriaSmart` - Consultoria Smart page
+- `/preco` - Pricing page
+- `/programaSejaLeve` - Programa Seja Leve page
+- `/nutri-bariatrica` - Nutri Bariátrica page
+- `/emagrecimento` - Emagrecimento page
+- `/inicio` - Início page
 
 ## Development
-The site is served using Python's built-in HTTP server on port 5000.
+Run with `npx tsx src/server.ts` on port 5000.
 
 ## Deployment
-Configured as a static site deployment serving the root directory.
+Configured with build step (`npm run build`) and runs compiled JavaScript in production.
