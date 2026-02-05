@@ -24,21 +24,38 @@ app.use('/img', express.static(path.join(publicDir, 'img')));
 app.use('/video', express.static(path.join(publicDir, 'video')));
 app.use('/vendor', express.static(path.join(publicDir, 'vendor')));
 
-app.post('/api/track-click', async (req, res) => {
+app.post('/api/track-pageview', async (req, res) => {
   try {
-    const { gclid, pageUrl, whatsappUrl } = req.body;
+    const { gclid, pageUrl } = req.body;
     const userAgent = req.headers['user-agent'] || '';
     const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
 
+    const result = await pool.query(
+      `INSERT INTO whatsapp_clicks (gclid, page_url, user_agent, ip_address) 
+       VALUES ($1, $2, $3, $4) RETURNING id`,
+      [gclid, pageUrl, userAgent, ipAddress]
+    );
+
+    res.json({ success: true, clickId: result.rows[0].id });
+  } catch (error) {
+    console.error('Error tracking pageview:', error);
+    res.status(500).json({ success: false });
+  }
+});
+
+app.post('/api/save-greeting', async (req, res) => {
+  try {
+    const { greetingMessage, clickId } = req.body;
+
     await pool.query(
-      `INSERT INTO whatsapp_clicks (gclid, page_url, whatsapp_url, user_agent, ip_address) 
-       VALUES ($1, $2, $3, $4, $5)`,
-      [gclid, pageUrl, whatsappUrl, userAgent, ipAddress]
+      `INSERT INTO whatsapp_greetings (greeting_message, whatsapp_click_id) 
+       VALUES ($1, $2)`,
+      [greetingMessage, clickId]
     );
 
     res.json({ success: true });
   } catch (error) {
-    console.error('Error tracking click:', error);
+    console.error('Error saving greeting:', error);
     res.status(500).json({ success: false });
   }
 });

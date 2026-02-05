@@ -29,20 +29,29 @@ A collection of landing pages for a nutritionist/health professional website. Th
 - `/inicio` - Início page
 
 ## API Endpoints
-- `POST /api/track-click` - Records WhatsApp button clicks with gclid for Google Ads offline conversions
+- `POST /api/track-pageview` - Records page views with gclid on page load
+- `POST /api/save-greeting` - Saves WhatsApp greeting message when user clicks button
 
 ## Database
-PostgreSQL with table `whatsapp_clicks`:
+
+### Table: whatsapp_clicks
 - id (serial, primary key)
 - gclid (varchar) - Google Ads click ID
-- page_url (text) - Page where click occurred
-- whatsapp_url (text) - WhatsApp link clicked
+- page_url (text) - Page visited
+- whatsapp_url (text)
 - user_agent (text)
 - ip_address (varchar)
 - created_at (timestamp)
 
+### Table: whatsapp_greetings
+- id (serial, primary key)
+- greeting_message (text) - WhatsApp greeting message
+- whatsapp_click_id (integer, FK to whatsapp_clicks.id)
+- created_at (timestamp)
+
 ## Google Ads Tracking
-The `whatsapp-tracker.js` script captures gclid from URL parameters and stores it in sessionStorage. When users click WhatsApp buttons, the gclid is sent to the API before redirecting.
+1. On page load: captures gclid from URL and saves to database
+2. On WhatsApp click: saves the greeting message linked to the page view
 
 ## Development
 Run with `npx tsx src/server.ts` on port 5000.
