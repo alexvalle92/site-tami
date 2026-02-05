@@ -1,9 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import pg from 'pg';
-
-const { Pool } = pg;
+import { supabase } from './supabase.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -11,10 +9,6 @@ const publicDir = path.join(__dirname, '..');
 
 const app = express();
 const PORT = 5000;
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
 
 app.use(express.json());
 
@@ -28,30 +22,48 @@ app.post('/api/track-pageview', async (req, res) => {
   try {
     const { gclid, pageUrl } = req.body;
     const userAgent = req.headers['user-agent'] || '';
-    const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+    const ipAddress = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || '';
 
-    const infoResult = await pool.query(
-      `INSERT INTO info_google_ads (gclid, page_url, user_agent, ip_address) 
-       VALUES ($1, $2, $3, $4) RETURNING id`,
-      [gclid, pageUrl, userAgent, ipAddress]
-    );
+    const { data: infoData, error: infoError } = await supabase
+      .from('info_google_ads')
+      .insert({
+        gclid,
+        page_url: pageUrl,
+        user_agent: userAgent,
+        ip_address: ipAddress
+      })
+      .select('id')
+      .single();
 
-    const infoGoogleAdsId = infoResult.rows[0].id;
+    if (infoError) {
+      console.error('Error inserting info_google_ads:', infoError);
+      return res.status(500).json({ success: false, error: infoError.message });
+    }
 
-    const greetingResult = await pool.query(
-      `UPDATE whatsapp_greetings 
-       SET id_info_google_ads = $1 
-       WHERE id = (
-         SELECT id FROM whatsapp_greetings 
-         WHERE id_info_google_ads IS NULL 
-         ORDER BY id 
-         LIMIT 1
-       )
-       RETURNING id, greeting_message`,
-      [infoGoogleAdsId]
-    );
+    const infoGoogleAdsId = infoData.id;
 
-    const greeting = greetingResult.rows[0] || null;
+    const { data: availableGreeting } = await supabase
+      .from('whatsapp_greetings')
+      .select('id, greeting_message')
+      .is('id_info_google_ads', null)
+      .order('id')
+      .limit(1)
+      .single();
+
+    let greeting = null;
+
+    if (availableGreeting) {
+      const { data: updatedGreeting, error: updateError } = await supabase
+        .from('whatsapp_greetings')
+        .update({ id_info_google_ads: infoGoogleAdsId })
+        .eq('id', availableGreeting.id)
+        .select('id, greeting_message')
+        .single();
+
+      if (!updateError && updatedGreeting) {
+        greeting = updatedGreeting;
+      }
+    }
 
     res.json({ 
       success: true, 

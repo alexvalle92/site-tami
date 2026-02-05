@@ -5,18 +5,25 @@ A collection of landing pages for a nutritionist/health professional website. Th
 
 ## Project Structure
 - `/src/` - TypeScript server code
+  - `server.ts` - Express server with API endpoints
+  - `supabase.ts` - Supabase client configuration
 - `/css/` - Custom stylesheets and themes
 - `/js/` - Custom JavaScript files (including whatsapp-tracker.js)
 - `/img/` - Image assets
 - `/video/` - Video assets
 - `/vendor/` - Third-party libraries (Bootstrap, FontAwesome, jQuery plugins, etc.)
 - `/*.html` - HTML landing pages
+- `schema.sql` - SQL schema to create tables in Supabase
 
 ## Tech Stack
 - TypeScript with Express.js server
-- PostgreSQL database
+- Supabase (PostgreSQL)
 - Bootstrap framework
 - jQuery and various plugins
+
+## Environment Variables
+- `SUPABASE_URL` - Supabase project URL
+- `SUPABASE_ANON_KEY` - Supabase anonymous key
 
 ## Routes
 - `/` - Main page (nutri-online-v1.html)
@@ -31,7 +38,7 @@ A collection of landing pages for a nutritionist/health professional website. Th
 ## API Endpoints
 - `POST /api/track-pageview` - Records page view with gclid and assigns an available greeting
 
-## Database
+## Database (Supabase)
 
 ### Table: info_google_ads
 - id (serial, primary key)
@@ -47,11 +54,10 @@ A collection of landing pages for a nutritionist/health professional website. Th
 - greeting_message (text) - WhatsApp greeting message
 - id_info_google_ads (integer, FK to info_google_ads.id) - NULL means available
 
-## Google Ads Tracking Flow
-1. User visits page → insert into info_google_ads (captures gclid)
-2. Find available greeting (where id_info_google_ads IS NULL)
-3. Update greeting with the new info_google_ads ID
-4. Return greeting to frontend
+## Setup Supabase
+1. Copy content from `schema.sql`
+2. Run in Supabase SQL Editor
+3. Set environment variables SUPABASE_URL and SUPABASE_ANON_KEY
 
 ## Development
 Run with `npx tsx src/server.ts` on port 5000.
