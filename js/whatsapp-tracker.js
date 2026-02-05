@@ -13,6 +13,33 @@
     return sessionStorage.getItem('gclid') || '';
   }
 
+  function buildWhatsappUrl(originalUrl, greetingMessage) {
+    try {
+      const url = new URL(originalUrl);
+      const phone = url.pathname.replace('/', '');
+      const encodedMessage = encodeURIComponent(greetingMessage);
+      return `https://wa.me/${phone}?text=${encodedMessage}`;
+    } catch {
+      return originalUrl;
+    }
+  }
+
+  function getGreetingMessage() {
+    if (currentGreeting && currentGreeting.greeting_message) {
+      return currentGreeting.greeting_message;
+    }
+    const stored = sessionStorage.getItem('greeting');
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        return parsed.greeting_message || null;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  }
+
   function trackPageview() {
     const gclid = getGclid();
     
@@ -43,7 +70,14 @@
     document.querySelectorAll('a[href*="wa.me"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        window.open(this.href, '_blank');
+        const greetingMessage = getGreetingMessage();
+        let finalUrl = this.href;
+        
+        if (greetingMessage) {
+          finalUrl = buildWhatsappUrl(this.href, greetingMessage);
+        }
+        
+        window.open(finalUrl, '_blank');
       });
     });
   });
