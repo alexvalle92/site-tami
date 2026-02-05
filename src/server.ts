@@ -30,32 +30,36 @@ app.post('/api/track-pageview', async (req, res) => {
     const userAgent = req.headers['user-agent'] || '';
     const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
 
-    const result = await pool.query(
-      `INSERT INTO whatsapp_clicks (gclid, page_url, user_agent, ip_address) 
+    const infoResult = await pool.query(
+      `INSERT INTO info_google_ads (gclid, page_url, user_agent, ip_address) 
        VALUES ($1, $2, $3, $4) RETURNING id`,
       [gclid, pageUrl, userAgent, ipAddress]
     );
 
-    res.json({ success: true, clickId: result.rows[0].id });
-  } catch (error) {
-    console.error('Error tracking pageview:', error);
-    res.status(500).json({ success: false });
-  }
-});
+    const infoGoogleAdsId = infoResult.rows[0].id;
 
-app.post('/api/save-greeting', async (req, res) => {
-  try {
-    const { greetingMessage, clickId } = req.body;
-
-    await pool.query(
-      `INSERT INTO whatsapp_greetings (greeting_message, whatsapp_click_id) 
-       VALUES ($1, $2)`,
-      [greetingMessage, clickId]
+    const greetingResult = await pool.query(
+      `UPDATE whatsapp_greetings 
+       SET id_info_google_ads = $1 
+       WHERE id = (
+         SELECT id FROM whatsapp_greetings 
+         WHERE id_info_google_ads IS NULL 
+         ORDER BY id 
+         LIMIT 1
+       )
+       RETURNING id, greeting_message`,
+      [infoGoogleAdsId]
     );
 
-    res.json({ success: true });
+    const greeting = greetingResult.rows[0] || null;
+
+    res.json({ 
+      success: true, 
+      infoId: infoGoogleAdsId,
+      greeting: greeting
+    });
   } catch (error) {
-    console.error('Error saving greeting:', error);
+    console.error('Error tracking pageview:', error);
     res.status(500).json({ success: false });
   }
 });

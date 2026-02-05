@@ -1,5 +1,5 @@
 (function() {
-  let clickId = null;
+  let currentGreeting = null;
 
   function getGclid() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -26,41 +26,15 @@
     })
     .then(response => response.json())
     .then(data => {
-      if (data.success && data.clickId) {
-        clickId = data.clickId;
-        sessionStorage.setItem('clickId', clickId);
+      if (data.success) {
+        sessionStorage.setItem('infoId', data.infoId);
+        if (data.greeting) {
+          currentGreeting = data.greeting;
+          sessionStorage.setItem('greeting', JSON.stringify(data.greeting));
+        }
       }
     })
     .catch(error => console.error('Error tracking pageview:', error));
-  }
-
-  function extractGreetingFromUrl(whatsappUrl) {
-    try {
-      const url = new URL(whatsappUrl);
-      return url.searchParams.get('text') || '';
-    } catch {
-      return '';
-    }
-  }
-
-  function handleWhatsappClick(whatsappUrl) {
-    const currentClickId = clickId || sessionStorage.getItem('clickId');
-    const greetingMessage = extractGreetingFromUrl(whatsappUrl);
-
-    if (currentClickId && greetingMessage) {
-      fetch('/api/save-greeting', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          greetingMessage: decodeURIComponent(greetingMessage),
-          clickId: parseInt(currentClickId)
-        })
-      }).finally(() => {
-        window.open(whatsappUrl, '_blank');
-      });
-    } else {
-      window.open(whatsappUrl, '_blank');
-    }
   }
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -69,7 +43,7 @@
     document.querySelectorAll('a[href*="wa.me"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        handleWhatsappClick(this.href);
+        window.open(this.href, '_blank');
       });
     });
   });

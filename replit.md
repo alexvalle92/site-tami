@@ -29,12 +29,11 @@ A collection of landing pages for a nutritionist/health professional website. Th
 - `/inicio` - Início page
 
 ## API Endpoints
-- `POST /api/track-pageview` - Records page views with gclid on page load
-- `POST /api/save-greeting` - Saves WhatsApp greeting message when user clicks button
+- `POST /api/track-pageview` - Records page view with gclid and assigns an available greeting
 
 ## Database
 
-### Table: whatsapp_clicks
+### Table: info_google_ads
 - id (serial, primary key)
 - gclid (varchar) - Google Ads click ID
 - page_url (text) - Page visited
@@ -46,12 +45,13 @@ A collection of landing pages for a nutritionist/health professional website. Th
 ### Table: whatsapp_greetings
 - id (serial, primary key)
 - greeting_message (text) - WhatsApp greeting message
-- whatsapp_click_id (integer, FK to whatsapp_clicks.id)
-- created_at (timestamp)
+- id_info_google_ads (integer, FK to info_google_ads.id) - NULL means available
 
-## Google Ads Tracking
-1. On page load: captures gclid from URL and saves to database
-2. On WhatsApp click: saves the greeting message linked to the page view
+## Google Ads Tracking Flow
+1. User visits page → insert into info_google_ads (captures gclid)
+2. Find available greeting (where id_info_google_ads IS NULL)
+3. Update greeting with the new info_google_ads ID
+4. Return greeting to frontend
 
 ## Development
 Run with `npx tsx src/server.ts` on port 5000.
