@@ -36,7 +36,7 @@ app.post('/api/track-pageview', async (req, res) => {
       .single();
 
     if (infoError) {
-      console.error('Error inserting info_google_ads:', infoError);
+      console.error('Error inserting info_google_ads:', JSON.stringify(infoError, null, 2));
       return res.status(500).json({ success: false, error: infoError.message });
     }
 
