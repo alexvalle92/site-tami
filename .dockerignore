@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.github
+.replit
+.cache
+.config
+.local
+.upm
+*.log
+.DS_Store
+replit.md
+schema.sql
+test
