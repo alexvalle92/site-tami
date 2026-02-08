@@ -21,6 +21,11 @@ app.use('/vendor', express.static(path.join(publicDir, 'vendor')));
 app.post('/api/track-pageview', async (req, res) => {
   try {
     const { gclid, pageUrl } = req.body;
+
+    if (!gclid) {
+      return res.json({ success: false, skipped: true });
+    }
+
     const userAgent = req.headers['user-agent'] || '';
     const ipAddress = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || '';
 

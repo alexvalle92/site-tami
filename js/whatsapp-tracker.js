@@ -43,6 +43,10 @@
   function trackPageview() {
     const gclid = getGclid();
     
+    if (!gclid) {
+      return;
+    }
+
     fetch('/api/track-pageview', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
