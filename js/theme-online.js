@@ -6287,7 +6287,7 @@ window.theme.fn = {
 					.addClass(self.options.buttonClass)
 					.addClass('con-tooltip')
 					.attr({
-						'href': 'https://wa.me/5544991767525?text=Oi.%20Gostaria%20de%20saber%20como%20funciona%20seu%20acompanhamento%20nutricional%20online.&utm_source=site&utm_medium=botao&utm_campaign=consulta_online',
+						'href': 'https://wa.me/5544991330058?text=Oi.%20Gostaria%20de%20saber%20como%20funciona%20seu%20acompanhamento%20nutricional%20online.&utm_source=site&utm_medium=botao&utm_campaign=consulta_online',
 						'aria-label': self.options.buttonAriaLabel,
 						'target': '_blank'
 					})
